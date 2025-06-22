@@ -1,0 +1,3 @@
+[submodule "lib/JumpDisplay"]
+	path = lib/JumpDisplay
+	url = https://github.com/diego-ramirez-dbr/JumpDisplay
