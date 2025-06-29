@@ -1,5 +1,7 @@
 #include <Arduino.h>
+#include <JumpDisplay.h>
 
+// MUX control pins
 const int S0 = 2;
 const int S1 = 3;
 const int S2 = 4;
@@ -15,6 +17,13 @@ const int muxChannels[13] = {
 unsigned long lastPrintTime = 0;
 const unsigned long printInterval = 1000;  // 1 second
 
+// Display pins
+#define DATA_PIN  11
+#define CLOCK_PIN 13
+#define LATCH_PIN 10
+
+JumpDisplay display(DATA_PIN, CLOCK_PIN, LATCH_PIN);
+
 void setup() {
   Serial.begin(9600);
 
@@ -23,6 +32,9 @@ void setup() {
   pinMode(S2, OUTPUT);
   pinMode(S3, OUTPUT);
   pinMode(SIG, INPUT_PULLUP);  // HIGH = reed open = tab hit
+
+  display.begin();
+  display.displayNumber(75);  // Always show 75 on startup
 }
 
 void setMuxChannel(int channel) {
@@ -69,5 +81,8 @@ void loop() {
     } else {
       Serial.println("JUMP");
     }
+
+    // Regardless of which tab was hit, show 75
+    display.displayNumber(75);
   }
 }
