@@ -81,8 +81,5 @@ void loop() {
     } else {
       Serial.println("JUMP");
     }
-
-    // Regardless of which tab was hit, show 75
-    display.displayNumber(75);
   }
 }
